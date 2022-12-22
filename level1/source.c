@@ -1,11 +1,12 @@
+int run()
+{
+    write(1, "Good... Wait what?\n", 0x13);
+    return system("/bin/sh");
+}
+
 int main(int ac, char **av)
 {
-    int iVar1;
-    iVar1 = atoi(av[1]);
-    if (iVar1 == 0x1a7) // 423
-        execv("/bin/sh", *av);
-    else
-        write(1, "No !\n", 5);
-
+    char tmp[76];
+    gets(tmp);
     return 0;
 }
