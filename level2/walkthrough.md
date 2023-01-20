@@ -1,6 +1,6 @@
 # Level 2
 
-first we check the escutable file we found our binary wait an input and print the string.
+first we check the excutable file we found our binary wait an input and print the string.
 
 we use gdb to disassemble the main function and that what we got:
 
@@ -92,6 +92,12 @@ Arglist at 0xbffff6f8, args:
 Locals at 0xbffff6f8, Previous frame's sp is 0xbffff700
 Saved registers:
 ebp at 0xbffff6f8, eip at 0xbffff6fc
+```
+
+we can now the return addres by this way
+
+```
+x/x $ebp + 4
 ```
 
 the address of `ebp-0x4c` is `0xbffff6ac`
