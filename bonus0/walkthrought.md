@@ -97,3 +97,22 @@ Dump of assembler code for function p:
    0x0804851d <+105>:	ret
 End of assembler dump.
 ```
+
+```
+Starting program: /home/user/bonus0/bonus0
+ -
+BBBBCCCCDDDDEEEEFFFFJJJJHHHHKKKKLLLLMMMM
+ -
+ZZZZXXXXQQQQYYYYRRRR
+
+Program received signal SIGSEGV, Segmentation fault.
+0x59515151 in ?? ()
+
+(gdb) x/60wx 0xbffff688
+0xbffff688:	0x00000045	0x43434343	0x44444444	0x45454545
+0xbffff698:	0x46464646	0xb7e2b900	0x58585858	0x51515151
+0xbffff6a8:	0x59595959	0xb7fd0ff4	0x00000000	0x00000000
+
+(gdb) x/x 0xbffff6a5
+0xbffff6a5:	0x59515151
+```
