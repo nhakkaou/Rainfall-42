@@ -1,8 +1,24 @@
+int Language = 0;
+
+int greetuser(char *tmp)
+{
+    char *h = "Hello ";
+    if (Language == 1)
+        h = "Hyvää päivää ";
+    if (Language == 2)
+        h = "Goedemiddag! ";
+
+    concat(tmp, h);
+    puts(tmp);
+    return (0);
+}
+
 int main(int ac, char **av)
 {
-    char *tmp;
     if (ac == 3)
     {
+        char *tmp;
+        int a;
         bzero(tmp, 0x13); // 19
         strncpy(tmp, av[1], 40);
         strncpy(tmp + 0x28, av[2], 32);
@@ -13,11 +29,13 @@ int main(int ac, char **av)
         else
         {
             if (memcmp(env, "fi", 2) == 0)
-            {
-            }
+
+                Language = 1;
+
             if (memcmp(env, "nl", 2) == 0)
-            {
-            }
+
+                Language = 2;
+
             for (int i = 19; i > 0; i--)
             {
                 // replace this buufer in the tmp by 1 <---
@@ -32,6 +50,7 @@ int main(int ac, char **av)
                 // 0xbffff6b0:	0x00000000	0x00000000	0x00000000	0x00000000
                 // 0xbffff6c0:	0x00000000	0x00000000	0x00000000
             }
+            return (greetuser(tmp));
         }
     }
     return (1);
