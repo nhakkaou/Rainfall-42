@@ -6,6 +6,5 @@ int main(int ac, char **av)
         execv("/bin/sh", *av);
     else
         write(1, "No !\n", 5);
-
     return 0;
 }
