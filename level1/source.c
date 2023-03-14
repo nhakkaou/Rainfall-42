@@ -6,7 +6,8 @@ int run()
 
 int main(int ac, char **av)
 {
-    char tmp[76];
+    char *tmp;
     gets(tmp);
     return 0;
+
 }
