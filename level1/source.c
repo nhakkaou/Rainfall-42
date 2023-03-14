@@ -1,6 +1,6 @@
 int run()
 {
-    write(1, "Good... Wait what?\n", 0x13);
+    fwrite("Good... Wait what?\n",1, 0x13,"stdout");
     return system("/bin/sh");
 }
 
