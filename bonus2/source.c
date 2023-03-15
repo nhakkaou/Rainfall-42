@@ -24,8 +24,7 @@ int main(int ac, char **av)
         strncpy(tmp + 0x28, av[2], 32);
         char *env = getenv('LANG');
         if (!env)
-        {
-        }
+            return (1);
         else
         {
             if (memcmp(env, "fi", 2) == 0)
