@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <iostream>
+
+class N
+{
+public:
+    N(char *a, char *b)
+    {
+        a = 0x8048848; // function _ZTV1N
+        a + 0x68 = b;
+    }
+
+    setAnnotation(char *s1, char *str)
+    {
+        int a = strlen(str);
+        s1++;
+        memcpy(s1, str, a);
+        return;
+    }
+}
+
+int
+main(int ac, char **av)
+{
+    if (ac < 2)
+        exit(1);
+    char *s1 = new char[0x6c] // allocation in cpp call   0x8048530 <_Znwj@plt>
+        N::N(s1, 0x5);
+    char *s2 = new char[0x6c] // allocation in cpp call   0x8048530 <_Znwj@plt>
+        N::N(s1, 0x6);
+    N::setAnnotation(s1, av[1]);
+    (s2)(s2, s1); // call the function that store in s1[0]
+    return (0);
+}
