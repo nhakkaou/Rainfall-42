@@ -118,3 +118,9 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 
 So in the offset 9 we got the segfault so we try to add our shell code in the read buffer after 20 letter and at the offset 9 we give it the address of our shell code
+
+```
+(gdb) x/x 0xbfffe650 + 0x14
+0xbfffe664:	0x42424242
+(gdb)
+```

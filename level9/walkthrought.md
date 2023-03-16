@@ -99,7 +99,7 @@ _ZNSt8ios_base4InitD1Ev(0x8049bb4, 11, 0x804a078, 0x8048738, 0x804a00c) = 0xb7fc
 +++ exited (status 11) +++
 ```
 
-So here they call \_Znwj twice and return an address and then check the length and copy the input into 0x0804a00c which is the next address after 0x804a008 +4.
+So here they call \_Znwj twice and return an address and then check the length and copy the input into 0x0804a00c which is the next address after 0x804a008 +0x4.
 
 lets check what's happend in this code we break in the line <+136> and we print the memory.
 

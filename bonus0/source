@@ -7,7 +7,7 @@ char *p(char *s, char *str)
 
     puts(str);
     read(0, buffer, 4096);
-    strchr(buffer, '\n') = 0;
+    strchr(buffer, '\n');
     return (strncpy(s, buffer, 20));
 }
 
