@@ -1,0 +1,16 @@
+
+int n(){
+    return system("/bin/cat /home/user/level7/.pass")
+}
+
+int m(){
+    return puts("Nope")
+}
+
+int main(int ac, char *av[]){
+    char *malloc1 = malloc(0x40);
+    int *malloc2 = malloc(0x4);
+    *malloc2 = 0x8048468; // addr of function m()
+    strcpy(malloc1, av[1])
+    return (*malloc2)()
+}

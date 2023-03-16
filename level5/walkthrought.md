@@ -86,6 +86,7 @@ so we change this address 0x8049828 to not let the program redirect to the exit 
 ```
 
 ```c
+cd ../level6
 cat .pass
 d3b7bf1025225bd715fa8ccb54ef06ca70b9125ac855aeab4878217177f41a31
 ```
