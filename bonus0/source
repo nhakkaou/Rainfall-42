@@ -21,8 +21,6 @@ char *pp(char *buffer)
     p(b, " - ");
     strcpy(buffer, a);
     len = strlen(buffer);
-    buffer[len] = ' ';
-    buffer[len + 1] = 0;
     return (strcat(buffer, b));
 }
 int main(int ac, char **av)
